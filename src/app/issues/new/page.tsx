@@ -11,12 +11,14 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import SimpleMDE from 'react-simplemde-editor';
 import { z } from 'zod';
+import Spinner from '@/src/app/components/Spinner';
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
 export default function NewIssuePage() {
   const router = useRouter();
   const [error, setError] = useState('');
+  const [isSubmitting, setSubmitting] = useState(false);
   const {
     register,
     control,
@@ -37,9 +39,11 @@ export default function NewIssuePage() {
         className='space-y-3'
         onSubmit={handleSubmit(async (data) => {
           try {
+            setSubmitting(true);
             await axios.post('/api/issues', data);
             router.push('/issues');
           } catch (error) {
+            setSubmitting(false);
             setError('An unexpected error occurred!');
           }
         })}
@@ -56,7 +60,9 @@ export default function NewIssuePage() {
           )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <Button>Submit New Issue</Button>
+        <Button disabled={isSubmitting}>
+          Submit New Issue {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
