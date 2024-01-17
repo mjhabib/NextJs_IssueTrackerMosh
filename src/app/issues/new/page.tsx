@@ -2,6 +2,7 @@
 
 import ErrorMessage from '@/src/app/components/ErrorMessage';
 import Spinner from '@/src/app/components/Spinner';
+import dynamic from 'next/dynamic';
 import { createIssueSchema } from '@/src/app/validationSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Callout, TextField } from '@radix-ui/themes';
@@ -10,8 +11,12 @@ import 'easymde/dist/easymde.min.css';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import SimpleMDE from 'react-simplemde-editor';
 import { z } from 'zod';
+
+// although this editor did not cause any errors, but for practice we disabled the SSR (lazy loading) because it uses browser's API to work, and all components will render on server whether they're client or server components, which might cause issues.
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
+  ssr: false,
+});
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
