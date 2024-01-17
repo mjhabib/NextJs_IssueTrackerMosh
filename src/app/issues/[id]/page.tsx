@@ -1,8 +1,8 @@
 import prisma from '@/root/prisma/client';
 import { Card, Flex, Heading, Text } from '@radix-ui/themes';
 import { notFound } from 'next/navigation';
-import IssueStatusBadges from '../../components/IssueStatusBadges';
 import ReactMarkdown from 'react-markdown';
+import IssueStatusBadges from '../../components/IssueStatusBadges';
 
 interface Props {
   params: { id: string };
@@ -17,6 +17,8 @@ export default async function IssueDetailPage({ params }: Props) {
     notFound();
     // return is not required because the return type of this function is 'never'
   }
+
+  await new Promise((resolve) => setTimeout(resolve, 1500));
 
   return (
     <div>
