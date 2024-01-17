@@ -1,8 +1,6 @@
-import React from 'react';
-import { Table } from '@radix-ui/themes';
-import CustomLink from '../components/CustomLink';
 import prisma from '@/root/prisma/client';
-import IssueStatusBadges from '../components/IssueStatusBadges';
+import { CustomLink, IssueStatusBadges } from '@/src/app/components';
+import { Table } from '@radix-ui/themes';
 import IssueActions from './IssueActions';
 
 export default async function IssuesPage() {
