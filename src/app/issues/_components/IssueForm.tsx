@@ -43,6 +43,8 @@ export default function IssueForm({ issue }: Props) {
       // PATCH an issue
       if (issue) {
         await axios.patch(`/api/issues/${issue.id}`, data);
+        router.push('/issues');
+        router.refresh();
       } else {
         // POST an issue
         await axios.post('/api/issues', data);
