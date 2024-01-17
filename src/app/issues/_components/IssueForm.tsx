@@ -47,6 +47,8 @@ export default function IssueForm({ issue }: Props) {
         // POST an issue
         await axios.post('/api/issues', data);
         router.push('/issues');
+        // refresh deals with the client caching
+        router.refresh();
       }
     } catch (error) {
       setSubmitting(false);
