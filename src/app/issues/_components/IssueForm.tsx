@@ -5,7 +5,7 @@
 import ErrorMessage from '@/src/app/components/ErrorMessage';
 import Spinner from '@/src/app/components/Spinner';
 import SimpleMDE from 'react-simplemde-editor';
-import { createIssueSchema } from '@/src/app/validationSchemas';
+import { issueSchema } from '@/src/app/validationSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Callout, TextField } from '@radix-ui/themes';
 import axios from 'axios';
@@ -16,7 +16,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Issue } from '@prisma/client';
 
-type IssueFormData = z.infer<typeof createIssueSchema>;
+type IssueFormData = z.infer<typeof issueSchema>;
 interface Props {
   issue?: Issue;
 }
@@ -31,7 +31,7 @@ export default function IssueForm({ issue }: Props) {
     handleSubmit,
     formState: { errors },
   } = useForm<IssueFormData>({
-    resolver: zodResolver(createIssueSchema),
+    resolver: zodResolver(issueSchema),
   });
 
   const onSubmit = handleSubmit(async (data) => {
