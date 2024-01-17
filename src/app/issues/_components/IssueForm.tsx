@@ -17,6 +17,8 @@ import { z } from 'zod';
 import { Issue } from '@prisma/client';
 
 type IssueFormData = z.infer<typeof issueSchema>;
+
+// this optional issue is passed from our PATCH api
 interface Props {
   issue?: Issue;
 }
@@ -37,8 +39,15 @@ export default function IssueForm({ issue }: Props) {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setSubmitting(true);
-      await axios.post('/api/issues', data);
-      router.push('/issues');
+
+      // PATCH an issue
+      if (issue) {
+        await axios.patch(`/api/issues/${issue.id}`, data);
+      } else {
+        // POST an issue
+        await axios.post('/api/issues', data);
+        router.push('/issues');
+      }
     } catch (error) {
       setSubmitting(false);
       setError('An unexpected error occurred!');
@@ -71,7 +80,8 @@ export default function IssueForm({ issue }: Props) {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={isSubmitting}>
-          Submit New Issue {isSubmitting && <Spinner />}
+          {issue ? 'Update Issue' : 'Submit New Issue'}{' '}
+          {isSubmitting && <Spinner />}
         </Button>
       </form>
     </div>
