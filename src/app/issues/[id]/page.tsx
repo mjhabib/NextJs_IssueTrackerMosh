@@ -30,8 +30,8 @@ export default async function IssueDetailPage({ params }: Props) {
       <Box>
         <Flex direction='column' gap='4'>
           <IssueDetailsButton issueId={issue.id} />
-          {/* Single Responsibility Principle */}
           <IssueDeleteButton issueId={issue.id} />
+          {/* Single Responsibility Principle */}
         </Flex>
       </Box>
     </Grid>

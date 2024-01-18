@@ -23,9 +23,9 @@ export default function RootLayout({
       <body className={inter.variable}>
         <Theme appearance='light' accentColor='purple' radius='large'>
           <NavBar />
-          <Container>
-            <main className='p-5'>{children}</main>
-          </Container>
+          <main className='p-5'>
+            <Container>{children}</Container>
+          </main>
           {/* <ThemePanel /> */}
         </Theme>
       </body>
