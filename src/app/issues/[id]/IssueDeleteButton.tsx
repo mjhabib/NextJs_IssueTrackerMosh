@@ -14,8 +14,8 @@ export default function IssueDeleteButton({ issueId }: { issueId: number }) {
 
   async function deleteIssue() {
     try {
-      await axios.delete(`/api/issues/${issueId}`);
       setDisableButton(true);
+      await axios.delete(`/api/issues/${issueId}`);
       router.push('/issues');
       router.refresh();
     } catch (error) {
