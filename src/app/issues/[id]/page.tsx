@@ -19,7 +19,7 @@ export default async function IssueDetailPage({ params }: Props) {
     // return is not required because the return type of this function is 'never'
   }
 
-  await new Promise((resolve) => setTimeout(resolve, 1500));
+  // await new Promise((resolve) => setTimeout(resolve, 1500));
 
   return (
     <Grid columns={{ initial: '1', sm: '5' }} gap='5'>

@@ -5,7 +5,7 @@ import IssueActions from './IssueActions';
 
 export default async function IssuesPage() {
   const issues = await prisma.issue.findMany();
-  await new Promise((resolve) => setTimeout(resolve, 1500));
+  // await new Promise((resolve) => setTimeout(resolve, 1500));
 
   return (
     <div>
