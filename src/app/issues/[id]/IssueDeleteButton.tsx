@@ -10,20 +10,45 @@ import { Spinner } from '../../components';
 export default function IssueDeleteButton({ issueId }: { issueId: number }) {
   const router = useRouter();
   const [disableButton, setDisableButton] = useState(false);
+  const [error, setError] = useState(false);
 
-  async function onDelete() {
-    await axios.delete(`/api/issues/${issueId}`);
-    setDisableButton(true);
-    router.push('/issues');
-    router.refresh();
+  async function deleteIssue() {
+    try {
+      await axios.delete(`/api/issues/${issueId}`);
+      setDisableButton(true);
+      router.push('/issues');
+      router.refresh();
+    } catch (error) {
+      setError(true);
+    }
   }
 
   return (
-    <Button color='red' onClick={onDelete} disabled={disableButton}>
-      <CrossCircledIcon />
-      Delete Issue
-      {disableButton && <Spinner />}
-    </Button>
+    <>
+      <Button color='red' onClick={deleteIssue} disabled={disableButton}>
+        <CrossCircledIcon />
+        Delete Issue
+        {disableButton && <Spinner />}
+      </Button>
+
+      {/* If something goes wrong! */}
+      <AlertDialog.Root open={error}>
+        <AlertDialog.Content>
+          <AlertDialog.Title>Error</AlertDialog.Title>
+          <AlertDialog.Description>
+            This issue could not be deleted!
+          </AlertDialog.Description>
+          <Button
+            color='gray'
+            variant='soft'
+            mt='2'
+            onClick={() => setError(false)}
+          >
+            OK
+          </Button>
+        </AlertDialog.Content>
+      </AlertDialog.Root>
+    </>
     // <AlertDialog.Root>
     //   <AlertDialog.Trigger>
     //     <Button color='red'>Delete Issue</Button>
