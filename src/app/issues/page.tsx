@@ -1,5 +1,5 @@
-import prisma from '@/root/prisma/client';
-import { CustomLink, IssueStatusBadges } from '@/src/app/components';
+import prisma from '@root/prisma/client';
+import { CustomLink, IssueStatusBadges } from '@src/app/components';
 import { Table } from '@radix-ui/themes';
 import IssueActions from './IssueActions';
 

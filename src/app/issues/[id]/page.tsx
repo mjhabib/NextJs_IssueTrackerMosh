@@ -1,4 +1,4 @@
-import prisma from '@/root/prisma/client';
+import prisma from '@root/prisma/client';
 import { Box, Flex, Grid } from '@radix-ui/themes';
 import { notFound } from 'next/navigation';
 import IssueDetails from './IssueDetails';

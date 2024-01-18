@@ -2,10 +2,10 @@
 
 'use client';
 
-import ErrorMessage from '@/src/app/components/ErrorMessage';
-import Spinner from '@/src/app/components/Spinner';
+import ErrorMessage from '@src/app/components/ErrorMessage';
+import Spinner from '@app/components/Spinner';
 import SimpleMDE from 'react-simplemde-editor';
-import { issueSchema } from '@/src/app/validationSchemas';
+import { issueSchema } from '@app/validationSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Callout, TextField } from '@radix-ui/themes';
 import axios from 'axios';

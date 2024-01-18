@@ -1,5 +1,5 @@
 import { Box } from '@radix-ui/themes';
-import { Skeleton } from '@/app/components';
+import { Skeleton } from '@app/components';
 
 export default function IssueFormSkeleton() {
   return (

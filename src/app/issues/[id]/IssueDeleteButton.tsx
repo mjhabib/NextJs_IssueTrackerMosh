@@ -5,7 +5,7 @@ import { CrossCircledIcon } from '@radix-ui/react-icons';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Spinner } from '../../components';
+import { Spinner } from '@app/components';
 
 export default function IssueDeleteButton({ issueId }: { issueId: number }) {
   const router = useRouter();

@@ -1,4 +1,4 @@
-import { Skeleton } from '@/app/components';
+import { Skeleton } from '@app/components';
 import { Button, Table } from '@radix-ui/themes';
 import Link from 'next/link';
 
