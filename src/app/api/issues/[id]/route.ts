@@ -6,6 +6,7 @@ interface Props {
   params: { id: string };
 }
 
+// Update an issue
 export async function PATCH(request: NextRequest, { params }: Props) {
   const body = await request.json();
   const validation = issueSchema.safeParse(body);
@@ -31,4 +32,21 @@ export async function PATCH(request: NextRequest, { params }: Props) {
   });
 
   return NextResponse.json(updatedIssue);
+}
+
+// Delete an issue
+export async function DELETE(request: NextRequest, { params }: Props) {
+  const issue = await prisma.issue.findUnique({
+    where: { id: parseInt(params.id) },
+  });
+
+  if (!issue) {
+    return NextResponse.json({ error: 'Invalid Issue' });
+  }
+
+  await prisma.issue.delete({
+    where: { id: issue.id },
+  });
+
+  return NextResponse.json({ message: 'The Issue was deleted' });
 }
