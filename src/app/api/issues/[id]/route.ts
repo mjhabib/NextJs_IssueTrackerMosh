@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { issueSchema } from '../../../validationSchemas';
+import { patchIssueSchema } from '@app/validationSchemas';
 import prisma from '@root/prisma/client';
 
 interface Props {
@@ -9,10 +9,20 @@ interface Props {
 // Update an issue
 export async function PATCH(request: NextRequest, { params }: Props) {
   const body = await request.json();
-  const validation = issueSchema.safeParse(body);
+  const validation = patchIssueSchema.safeParse(body);
 
   if (!validation.success) {
     return NextResponse.json(validation.error.format());
+  }
+
+  // assign issues to users
+  if (body.assignedToUserId) {
+    const user = await prisma.user.findUnique({
+      where: { id: body.assignedToUserId },
+    });
+    if (!user) {
+      return NextResponse.json({ error: 'Invalid User' });
+    }
   }
 
   const issue = await prisma.issue.findUnique({
@@ -28,6 +38,7 @@ export async function PATCH(request: NextRequest, { params }: Props) {
     data: {
       title: body.title,
       description: body.description,
+      assignedToUserId: body.assignedToUserId,
     },
   });
 
