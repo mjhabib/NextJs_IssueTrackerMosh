@@ -26,7 +26,7 @@ const IssueStatusFilter = () => {
           params.append('orderBy', searchParams.get('orderBy')!);
 
         const query = params.size ? '?' + params.toString() : '';
-        router.push('/issues/list' + query);
+        router.push('/issues' + query);
       }}>
       <Select.Trigger placeholder='Filter by status...' />
       <Select.Content>
